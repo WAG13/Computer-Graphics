@@ -1,6 +1,5 @@
 package drawer;
 
-
 import polygon.Constants;
 
 import java.awt.*;

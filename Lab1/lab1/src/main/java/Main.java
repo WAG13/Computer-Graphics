@@ -1,8 +1,6 @@
-import algorithm.Algorithm;
+import algorithm.*;
 import drawer.*;
 import polygon.*;
-import polygon.Point;
-import polygon.Polygon;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
@@ -28,16 +26,19 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) {
+    private static double pointToLocateX = 50;
+    private static double pointToLocateY = 70;
 
+    public static void main(String[] args) {
+        Point pointToLocate = new Point(pointToLocateX, pointToLocateY);
         //Point inside polygone
-        Point pointToLocate = new Point(50, 60);
+        pointToLocate = new Point(50, 60);
         //Point outside polygone
-        //pointToLocate = new Point(40, 20);
+        pointToLocate = new Point(40, 20);
         //Point on the edge
-        //pointToLocate = new Point(50, 30);
+        pointToLocate = new Point(50, 30);
         //Point at the point
-        //pointToLocate = new Point(30, 50);
+        pointToLocate = new Point(30, 50);
 
         PointReader pr = new PointReader("src/main/resources/points.txt");
 
@@ -53,9 +54,11 @@ public class Main {
         catch (Exception e){
             e.printStackTrace();
         }
-
         Polygon polygon = new Polygon(edgeList);
+
+
         boolean locatesInPolygon = Algorithm.pointLocatesInSimplePolygon(polygon, pointToLocate);
+        System.out.println(locatesInPolygon);
 
         //draw
         ArrayList<Line2D> edgesLine2D = new ArrayList<>();

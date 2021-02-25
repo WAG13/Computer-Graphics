@@ -12,6 +12,7 @@ public class Algorithm {
      * @param z point you want to define whether it locates in polygon or not
      * @return does point locates in polygon
      */
+    
     public static boolean pointLocatesInSimplePolygon(Polygon p, Point z){
         int leftCrossings = 0;
         boolean[] checkedEdges = new boolean[p.getEdges().size()];
