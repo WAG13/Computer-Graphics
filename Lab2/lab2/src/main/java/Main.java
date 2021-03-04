@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
 
         Point pointToLocate = new Point(pointToLocateX, pointToLocateY);
-        pointToLocate = new Point(0, 0);
+        pointToLocate = new Point(10, 30);
         //pointToLocate = new Point(20, 0);
         //pointToLocate = new Point(0, -5);
 

@@ -60,7 +60,7 @@ public class Graph {
     public List<Edge> algo(Point point) throws OutOfGraphException {
         sortVertexes();
         balance();
-        splitIntochains();
+        splitIntoChains();
         if(!pointInGraph(point)) {
             throw new OutOfGraphException();
         }
@@ -122,7 +122,7 @@ public class Graph {
         }
     }
 
-    public void splitIntochains() {
+    public void splitIntoChains() {
         for(Vertex vNext : vertexes[0].getOut()) {
             while(edges[0][vNext.getI()].getWeight() > 0) {
                 Vertex v = vertexes[0];
@@ -145,7 +145,7 @@ public class Graph {
     }
 
     public Result getSide(Chain chain, int i, int j, Point point) {
-        if(i == j && chain.getEdge(i).pointIsYBetween(point)) {
+        if(i >= j && chain.getEdge(i).pointIsYBetween(point)) {
             Edge e = chain.getEdge(i);
             double equation = e.equation(point);
             if(Double.compare(equation, 0) == 0) {
