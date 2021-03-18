@@ -2,13 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class Form {
+public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         Container content = frame.getContentPane();
         content.setLayout(new BorderLayout());
-        final DrawArea drawArea = new DrawArea();
-        content.add(drawArea, BorderLayout.CENTER);
+        final Drawer drawer = new Drawer();
+        content.add(drawer, BorderLayout.CENTER);
 
         JPanel controls = new JPanel();
 
@@ -17,9 +17,9 @@ public class Form {
 
         ActionListener actionListener = e -> {
             if(e.getSource() == chooseRegionButton) {
-                drawArea.setChoosingRegionMode();
+                drawer.setChoosingRegionMode();
             } else if(e.getSource() == newPointsSetButton) {
-                drawArea.setDrawingPointsMode();
+                drawer.setDrawingPointsMode();
             }
         };
 

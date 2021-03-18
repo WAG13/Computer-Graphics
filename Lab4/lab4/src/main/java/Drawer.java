@@ -6,7 +6,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class DrawArea extends JComponent {
+public class Drawer extends JComponent {
 
     enum Mode {
         DRAWING_POINTS, DRAWING_RECTANGLE
@@ -18,14 +18,14 @@ public class DrawArea extends JComponent {
     private Point fixedRectanglePoint;
     private Point currentMousePosition;
     private ArrayList<Point> points;
-    private TwoDTree tree;
+    private KDTree tree;
     private LinkedList<Integer> selectedPoints;
     private boolean drawingNewRectangle;
 
     private Image image;
     private Graphics2D graphics2D;
 
-    public DrawArea() {
+    public Drawer() {
         setDoubleBuffered(false);
         addListeners();
     }
@@ -34,7 +34,7 @@ public class DrawArea extends JComponent {
         drawingMode = Mode.DRAWING_RECTANGLE;
         tree = build2DTree(points, null);
         printTree(tree,0);
-        System.out.println("\n\n");
+        System.out.println("\n");
     }
 
     public void setDrawingPointsMode() {
@@ -193,16 +193,16 @@ public class DrawArea extends JComponent {
         else points.add(i, p);
     }
 
-    private TwoDTree build2DTree(ArrayList<Point> points, TwoDTree parent) {
+    private KDTree build2DTree(ArrayList<Point> points, KDTree parent) {
         if(points.isEmpty()) {
             return null;
         }
-        TwoDTree res;
+        KDTree res;
         int n = points.size() / 2;
         if(parent == null) {
-            res = new TwoDTree(null, true);
+            res = new KDTree(null, true);
         } else {
-            res = new TwoDTree(parent, !parent.isVerticalSplitting());
+            res = new KDTree(parent, !parent.isVerticalSplitting());
         }
 
         ArrayList<Point> rightPoints;
@@ -255,7 +255,7 @@ public class DrawArea extends JComponent {
         return res;
     }
 
-    private void searchPointsInArea(TwoDTree tree, Point center, int w, int h) {
+    private void searchPointsInArea(KDTree tree, Point center, int w, int h) {
         if(selectedPoints == null)
             selectedPoints = new LinkedList<>();
         if(tree == null)
@@ -268,7 +268,7 @@ public class DrawArea extends JComponent {
         }
     }
 
-    private void splitVerticallyAndSearch(TwoDTree tree, Point center, int w, int h) {
+    private void splitVerticallyAndSearch(KDTree tree, Point center, int w, int h) {
         float delta = PAINT_RADIUS / 2;
         if( isInRange(points.get(tree.getValue()).getX() + delta, center.getX() - w, center.getX() + w)) {
             if(isInRange(points.get(tree.getValue()).getY() + delta, center.getY() - h, center.getY() + h)) {
@@ -285,7 +285,7 @@ public class DrawArea extends JComponent {
         }
     }
 
-    private void splitHorizontallyAndSearch(TwoDTree tree, Point center, int w, int h) {
+    private void splitHorizontallyAndSearch(KDTree tree, Point center, int w, int h) {
         // needed to shift the point coordinates from top right angular to center
         float delta = PAINT_RADIUS / 2;
         if(isInRange(points.get(tree.getValue()).getY() + delta, center.getY() - h, center.getY() + h)) {
@@ -352,7 +352,7 @@ public class DrawArea extends JComponent {
         return result;
     }
 
-    private void printTree(TwoDTree p,int level)
+    private void printTree(KDTree p, int level)
     {
         if(p != null)
         {

@@ -1,14 +1,14 @@
 
-public class TwoDTree {
-    TwoDTree left;
-    TwoDTree right;
-    TwoDTree parent;
+public class KDTree {
+    KDTree left;
+    KDTree right;
+    KDTree parent;
     private int value;
     private boolean verticalSplitting;
 
-    public TwoDTree(){}
+    public KDTree(){}
 
-    public TwoDTree(TwoDTree parent, boolean verticalSplitting) {
+    public KDTree(KDTree parent, boolean verticalSplitting) {
         this.parent = parent;
         this.verticalSplitting = verticalSplitting;
     }
